@@ -1,0 +1,445 @@
+/* Basic Reset & Font Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /*font-family: 'Roboto', sans-serif; /* A fallback modern font */
+    font-family: 'VT323', monospace; /* Pixel font for retro feel */
+    background-color: #3a3a3a; /* Darker gray for desktop background */
+    /* Optional: Add a subtle pattern or gradient */
+    /* background-image: linear-gradient(45deg, #2c2c2c 25%, transparent 25%), linear-gradient(-45deg, #2c2c2c 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #2c2c2c 75%), linear-gradient(-45deg, transparent 75%, #2c2c2c 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px; */
+    color: #F5F5F5; /* Default light text */
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Desktop Background Style (Optional) */
+.desktop-background {
+    /* Could add a background image here */
+    /* background-image: url('your-wallpaper.jpg'); */
+    background-size: cover;
+    min-height: 100vh;
+    padding: 30px 15px; /* Ensure padding for container */
+}
+
+/* Winamp Container */
+.winamp-container {
+    background-color: #2C2C2C; /* Main Winamp background */
+    border: 2px solid #555;
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+    max-width: 900px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the container */
+    border-radius: 3px; /* Subtle rounding */
+    overflow: hidden; /* Keep contents clipped */
+}
+
+/* Winamp Title Bar */
+.winamp-title-bar {
+    background: linear-gradient(to bottom, #4a4a4a, #3a3a3a); /* Winamp-like gradient */
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default; /* Looks like it could be dragged */
+    border-bottom: 1px solid #1a1a1a;
+    height: 28px; /* Typical title bar height */
+}
+
+.title-text {
+    font-weight: bold;
+    color: #F5F5F5;
+    font-size: 1em; /* VT323 is large, adjust if using Roboto */
+    text-shadow: 1px 1px 1px #111;
+}
+
+.window-controls .control-btn {
+    display: inline-block;
+    background-color: #bbb;
+    color: #222;
+    border: 1px solid #555;
+    border-top-color: #ddd;
+    border-left-color: #ddd;
+    width: 18px;
+    height: 18px;
+    line-height: 16px;
+    text-align: center;
+    margin-left: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer; /* Make them look clickable */
+    font-family: Arial, sans-serif; /* Use standard font for symbols */
+}
+.window-controls .control-btn:active {
+    border-color: #ddd;
+    border-top-color: #555;
+    border-left-color: #555;
+}
+
+/* Wrapper for main body and side panel */
+.winamp-body-wrapper {
+    display: flex;
+    flex-direction: row; /* Default: side-by-side */
+}
+
+/* Main Body Content */
+.winamp-main-body {
+    flex-grow: 1; /* Takes available space */
+    padding: 10px 15px;
+    background-color: #232323; /* Slightly darker panel bg */
+    border-right: 1px solid #1a1a1a; /* Separator */
+}
+
+/* Tab Navigation */
+.winamp-tabs {
+    display: flex;
+    flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+    margin-bottom: 10px;
+    border-bottom: 2px solid #444;
+    padding-bottom: 5px;
+}
+
+.tab-button {
+    background-color: #4a4a4a;
+    color: #ccc;
+    border: 1px outset #666;
+    padding: 6px 12px;
+    margin-right: 5px;
+    margin-bottom: 5px; /* Spacing for wrapping */
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.tab-button:hover {
+    background-color: #5a5a5a;
+    color: #fff;
+}
+
+.tab-button.active-tab {
+    background-color: #D7FCD0; /* Accent Green */
+    color: #1a1a1a; /* Dark text on light bg */
+    border-style: inset;
+    font-weight: bold;
+}
+
+/* Content Panels */
+.winamp-content-panel {
+    display: none; /* Hide panels by default */
+    padding: 10px;
+    min-height: 300px; /* Ensure minimum height */
+    max-height: 450px; /* Limit height and allow scroll */
+    overflow-y: auto; /* Add scroll if content overflows */
+    /* Custom scrollbar (optional, WebKit only) */
+    scrollbar-width: thin;
+    scrollbar-color: #FA8072 #333; /* Salmon accent for scrollbar */
+}
+.winamp-content-panel::-webkit-scrollbar { width: 8px; }
+.winamp-content-panel::-webkit-scrollbar-track { background: #333; }
+.winamp-content-panel::-webkit-scrollbar-thumb { background-color: #FA8072; border-radius: 4px; border: 1px solid #222; }
+
+
+.winamp-content-panel.active-panel {
+    display: block; /* Show active panel */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.winamp-content-panel h2 {
+    color: #FFFDA5; /* Sticky note yellow for headers */
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    border-bottom: 1px dotted #555;
+    padding-bottom: 5px;
+}
+
+.winamp-content-panel ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;
+}
+
+.winamp-content-panel li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+/* Custom bullet point */
+.winamp-content-panel li::before {
+    content: '>'; /* Retro prompt symbol */
+    position: absolute;
+    left: 0;
+    color: #FA8072; /* Salmon accent */
+    font-weight: bold;
+}
+
+.winamp-content-panel blockquote {
+    border-left: 3px solid #D7FCD0; /* Accent Green */
+    padding-left: 15px;
+    margin: 15px 0;
+    font-style: italic;
+    color: #ccc;
+}
+.winamp-content-panel blockquote em {
+    display: block;
+    margin-top: 5px;
+    font-style: normal;
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.tagline {
+    color: #FFFDA5; /* Sticky note yellow */
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.now-streaming-bar {
+    background-color: #1a1a1a;
+    padding: 5px 10px;
+    margin-top: 15px;
+    border: 1px solid #444;
+    color: #D7FCD0; /* Accent Green */
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.now-streaming-bar .blink {
+    animation: blinker 1s linear infinite;
+    color: #FA8072; /* Salmon */
+    margin-right: 5px;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+.separator {
+    border: none;
+    border-top: 1px dashed #555;
+    margin: 20px 0;
+}
+
+.contact-links a, .social-icons a, .contact-links-prominent a, .social-icons-prominent a {
+    color: #D7FCD0; /* Accent Green */
+    text-decoration: none;
+    transition: color 0.2s;
+    margin: 0 5px; /* Add spacing between inline links */
+}
+.contact-links a:hover, .social-icons a:hover, .contact-links-prominent a:hover, .social-icons-prominent a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.contact-links, .social-icons {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+.social-icons {
+     margin-top: 10px;
+     display: flex; /* Use flexbox for better wrapping/spacing */
+     justify-content: center;
+     flex-wrap: wrap;
+ }
+
+.contact-links-prominent {
+    text-align: center;
+    margin: 20px 0;
+}
+.cta-button {
+    display: inline-block;
+    background-color: #FA8072; /* Salmon */
+    color: #232323;
+    padding: 8px 15px;
+    border: 1px outset #ff9a8d;
+    text-decoration: none;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.2s, transform 0.1s;
+}
+.cta-button:hover {
+    background-color: #ff9a8d;
+    color: #111;
+}
+.cta-button:active {
+    border-style: inset;
+    transform: scale(0.98);
+}
+.social-icons-prominent {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2em;
+    display: flex; /* Use flexbox for better wrapping/spacing */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.social-icons-prominent a {
+    margin: 0 10px; /* Spacing for prominent icons */
+    color: #FFFDA5; /* Yellow for social links */
+    display: inline-block; /* Ensure proper spacing */
+    margin-bottom: 5px; /* Space if they wrap */
+}
+.final-tagline { margin-top: 30px; }
+
+.placeholder-scroll {
+    border: 1px dashed #555;
+    padding: 20px;
+    margin-top: 15px;
+    text-align: center;
+    color: #888;
+}
+
+/* Side Panel (Newsletter/Equalizer) */
+.winamp-side-panel {
+    flex-basis: 250px; /* Fixed width for side panel */
+    flex-shrink: 0; /* Don't shrink */
+    background-color: #282828; /* Slightly different bg */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.module-title {
+    font-weight: bold;
+    color: #FFFDA5; /* Yellow title */
+    background-color: #3a3a3a;
+    padding: 5px 8px;
+    margin-bottom: 10px;
+    text-align: center;
+    border: 1px solid #444;
+    font-size: 1.1em;
+}
+
+.substack-embed {
+    margin-bottom: 15px;
+    flex-shrink: 0; /* Don't shrink iframe area */
+}
+.substack-embed iframe {
+    border-radius: 3px; /* Slightly round iframe corners */
+    max-width: 100%;
+}
+
+/* Equalizer Bars (Decorative) */
+.equalizer-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 80px; /* Height of the equalizer area */
+    padding: 10px 5px;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
+    margin-top: auto; /* Push to bottom */
+    flex-shrink: 0;
+}
+
+.equalizer-bars .bar {
+    width: 10%;
+    background-color: #D7FCD0; /* Accent Green */
+    animation: equalize 1.5s ease-in-out infinite alternate;
+}
+/* Stagger animation delays */
+.equalizer-bars .bar:nth-child(1) { height: 60%; animation-delay: 0s; background-color: #d7fcd0;}
+.equalizer-bars .bar:nth-child(2) { height: 30%; animation-delay: 0.2s; background-color: #c0fabb;}
+.equalizer-bars .bar:nth-child(3) { height: 75%; animation-delay: 0.4s; background-color: #a9f8a6;}
+.equalizer-bars .bar:nth-child(4) { height: 50%; animation-delay: 0.6s; background-color: #92f691;}
+.equalizer-bars .bar:nth-child(5) { height: 65%; animation-delay: 0.8s; background-color: #FA8072; } /* Salmon accent bar */
+.equalizer-bars .bar:nth-child(6) { height: 40%; animation-delay: 1s; background-color: #a9f8a6; }
+.equalizer-bars .bar:nth-child(7) { height: 70%; animation-delay: 1.2s; background-color: #c0fabb; }
+
+@keyframes equalize {
+    0% { height: 10%; }
+    50% { height: 100%; }
+    100% { height: 10%; }
+}
+
+
+/* Winamp Footer */
+.winamp-footer {
+    background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 0.8em;
+    color: #aaa;
+    border-top: 1px solid #1a1a1a;
+    height: 25px; /* Consistent small footer */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .winamp-container {
+        margin: 10px auto; /* Less margin on mobile */
+        border: none; /* Remove outer border if needed */
+        box-shadow: none;
+    }
+
+    .winamp-body-wrapper {
+        flex-direction: column; /* Stack main content and side panel */
+    }
+
+    .winamp-main-body {
+        border-right: none; /* Remove border when stacked */
+        border-bottom: 1px solid #1a1a1a; /* Add bottom border instead */
+    }
+
+    .winamp-side-panel {
+        flex-basis: auto; /* Allow side panel height to adjust */
+        width: 100%; /* Full width */
+        margin-top: 0; /* Remove space */
+    }
+
+    .equalizer-bars {
+        margin-top: 15px; /* Ensure space above equalizer */
+        height: 60px;
+    }
+
+    .winamp-content-panel {
+        min-height: 250px; /* Adjust min height */
+        max-height: none; /* Allow full scroll on mobile */
+        overflow-y: visible; /* Let the page scroll, not the panel */
+    }
+
+     .title-text { font-size: 0.9em; } /* Slightly smaller title */
+     .window-controls { display: none; } /* Hide decorative controls */
+
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px 5px; /* Less padding on very small screens */
+    }
+    .winamp-container {
+        margin: 5px auto;
+    }
+     .tab-button {
+        padding: 5px 8px;
+        font-size: 1em;
+    }
+    .winamp-content-panel h2 {
+        font-size: 1.5em;
+    }
+    .cta-button {
+        padding: 6px 12px;
+        font-size: 1em;
+    }
+    .equalizer-bars {
+         height: 50px;
+     }
+     .social-icons a, .social-icons-prominent a {
+         font-size: 0.9em; /* Slightly smaller social links on small screens */
+         margin: 0 4px; /* Adjust spacing */
+     }
+}
