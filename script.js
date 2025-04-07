@@ -1,51 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.tab-button');
-    const panels = document.querySelectorAll('.winamp-content-panel');
-    const winampContainer = document.getElementById('winamp-container'); // Optional: for future drag interactions
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Get the target panel ID from the data-target attribute
-            const targetPanelId = tab.getAttribute('data-target');
-            const targetPanel = document.getElementById(targetPanelId);
+    // --- Footer Year ---
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 
-            // Remove active classes from all tabs and panels
-            tabs.forEach(t => t.classList.remove('active-tab'));
-            panels.forEach(p => p.classList.remove('active-panel'));
+    // --- Fade-in Animation on Scroll ---
+    const observerOptions = {
+        root: null, // relative to document viewport
+        rootMargin: '0px',
+        threshold: 0.1 // trigger when 10% of the element is visible
+    };
 
-            // Add active class to the clicked tab and corresponding panel
-            tab.classList.add('active-tab');
-            if (targetPanel) {
-                targetPanel.classList.add('active-panel');
-                 // Optional: Scroll panel to top when switching
-                targetPanel.scrollTop = 0;
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Stop observing once visible
             }
         });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    const elementsToFade = document.querySelectorAll('.fade-in');
+    elementsToFade.forEach(el => {
+        observer.observe(el);
     });
 
-    // --- Optional: Basic Fake Window Controls ---
-    const closeButton = document.querySelector('.control-btn.close');
-    const minimizeButton = document.querySelector('.control-btn.minimize');
-    const maximizeButton = document.querySelector('.control-btn.maximize');
+     // --- Personalize Content (Replace placeholders here too if not done in HTML) ---
+     const emailLinks = document.querySelectorAll('a[href="mailto:your.email@example.com"]');
+     emailLinks.forEach(link => link.href = 'mailto:your.real.email@example.com'); // !!! REPLACE with your actual email
 
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
-            // Just visually hide it for fun, doesn't actually close the page
-            // winampContainer.style.display = 'none';
-            alert('Alt+F4 still works better ;)'); // Playful alert
-        });
-    }
-     if (minimizeButton) {
-        minimizeButton.addEventListener('click', () => {
-            // Could add a class to visually 'minimize' it later
-             alert('Minimizing to the nostalgia tray...');
-        });
-    }
-     if (maximizeButton) {
-        maximizeButton.addEventListener('click', () => {
-            // Could toggle a 'maximized' class later
-             alert('Already fullscreen in its retro glory!');
-        });
-    }
+     const calendlyLinks = document.querySelectorAll('a[href="YOUR_CALENDLY_LINK_HERE"]');
+     calendlyLinks.forEach(link => link.href = 'YOUR_ACTUAL_CALENDLY_LINK'); // !!! REPLACE with your actual Calendly link
+
+     // Add your actual social media links here if you prefer JS over HTML edits
+     // const linkedinLink = document.querySelector('.social-icons a[href="#"]'); // Example
+     // if(linkedinLink) linkedinLink.href = 'YOUR_LINKEDIN_URL';
+
 
 });

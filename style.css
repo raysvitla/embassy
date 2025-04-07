@@ -1,445 +1,316 @@
-/* Basic Reset & Font Setup */
+/* --- Reset & Base Styles --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth; /* Optional: smooth scroll for anchor links */
+}
+
 body {
-    /*font-family: 'Roboto', sans-serif; /* A fallback modern font */
-    font-family: 'VT323', monospace; /* Pixel font for retro feel */
-    background-color: #3a3a3a; /* Darker gray for desktop background */
-    /* Optional: Add a subtle pattern or gradient */
-    /* background-image: linear-gradient(45deg, #2c2c2c 25%, transparent 25%), linear-gradient(-45deg, #2c2c2c 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #2c2c2c 75%), linear-gradient(-45deg, transparent 75%, #2c2c2c 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px; */
-    color: #F5F5F5; /* Default light text */
-    padding: 20px;
-    line-height: 1.6;
+    font-family: 'Lato', sans-serif;
+    background-color: #FFFFFF; /* White main background */
+    color: #444; /* Dark gray body text */
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-/* Desktop Background Style (Optional) */
-.desktop-background {
-    /* Could add a background image here */
-    /* background-image: url('your-wallpaper.jpg'); */
-    background-size: cover;
-    min-height: 100vh;
-    padding: 30px 15px; /* Ensure padding for container */
+.page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-/* Winamp Container */
-.winamp-container {
-    background-color: #2C2C2C; /* Main Winamp background */
-    border: 2px solid #555;
-    border-top: 2px solid #777;
-    border-left: 2px solid #777;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
-    max-width: 900px; /* Adjust width as needed */
-    margin: 0 auto; /* Center the container */
-    border-radius: 3px; /* Subtle rounding */
-    overflow: hidden; /* Keep contents clipped */
+/* --- Typography --- */
+h1, h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #222; /* Near-black headings */
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+    font-weight: 700;
 }
 
-/* Winamp Title Bar */
-.winamp-title-bar {
-    background: linear-gradient(to bottom, #4a4a4a, #3a3a3a); /* Winamp-like gradient */
-    padding: 4px 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: default; /* Looks like it could be dragged */
-    border-bottom: 1px solid #1a1a1a;
-    height: 28px; /* Typical title bar height */
+h1 {
+    font-size: 2.5rem; /* Larger for hero */
 }
 
-.title-text {
-    font-weight: bold;
-    color: #F5F5F5;
-    font-size: 1em; /* VT323 is large, adjust if using Roboto */
-    text-shadow: 1px 1px 1px #111;
+h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle line under section titles */
+    padding-bottom: 0.4em;
+    margin-bottom: 1em;
 }
 
-.window-controls .control-btn {
-    display: inline-block;
-    background-color: #bbb;
-    color: #222;
-    border: 1px solid #555;
-    border-top-color: #ddd;
-    border-left-color: #ddd;
-    width: 18px;
-    height: 18px;
-    line-height: 16px;
-    text-align: center;
-    margin-left: 3px;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer; /* Make them look clickable */
-    font-family: Arial, sans-serif; /* Use standard font for symbols */
-}
-.window-controls .control-btn:active {
-    border-color: #ddd;
-    border-top-color: #555;
-    border-left-color: #555;
+p {
+    margin-bottom: 1.2em;
 }
 
-/* Wrapper for main body and side panel */
-.winamp-body-wrapper {
-    display: flex;
-    flex-direction: row; /* Default: side-by-side */
-}
-
-/* Main Body Content */
-.winamp-main-body {
-    flex-grow: 1; /* Takes available space */
-    padding: 10px 15px;
-    background-color: #232323; /* Slightly darker panel bg */
-    border-right: 1px solid #1a1a1a; /* Separator */
-}
-
-/* Tab Navigation */
-.winamp-tabs {
-    display: flex;
-    flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
-    margin-bottom: 10px;
-    border-bottom: 2px solid #444;
-    padding-bottom: 5px;
-}
-
-.tab-button {
-    background-color: #4a4a4a;
-    color: #ccc;
-    border: 1px outset #666;
-    padding: 6px 12px;
-    margin-right: 5px;
-    margin-bottom: 5px; /* Spacing for wrapping */
-    cursor: pointer;
-    font-family: 'VT323', monospace;
-    font-size: 1.1em;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.tab-button:hover {
-    background-color: #5a5a5a;
-    color: #fff;
-}
-
-.tab-button.active-tab {
-    background-color: #D7FCD0; /* Accent Green */
-    color: #1a1a1a; /* Dark text on light bg */
-    border-style: inset;
-    font-weight: bold;
-}
-
-/* Content Panels */
-.winamp-content-panel {
-    display: none; /* Hide panels by default */
-    padding: 10px;
-    min-height: 300px; /* Ensure minimum height */
-    max-height: 450px; /* Limit height and allow scroll */
-    overflow-y: auto; /* Add scroll if content overflows */
-    /* Custom scrollbar (optional, WebKit only) */
-    scrollbar-width: thin;
-    scrollbar-color: #FA8072 #333; /* Salmon accent for scrollbar */
-}
-.winamp-content-panel::-webkit-scrollbar { width: 8px; }
-.winamp-content-panel::-webkit-scrollbar-track { background: #333; }
-.winamp-content-panel::-webkit-scrollbar-thumb { background-color: #FA8072; border-radius: 4px; border: 1px solid #222; }
-
-
-.winamp-content-panel.active-panel {
-    display: block; /* Show active panel */
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.winamp-content-panel h2 {
-    color: #FFFDA5; /* Sticky note yellow for headers */
-    margin-bottom: 15px;
-    font-size: 1.8em;
-    border-bottom: 1px dotted #555;
-    padding-bottom: 5px;
-}
-
-.winamp-content-panel ul {
-    list-style: none; /* Remove default bullets */
-    padding-left: 0;
-}
-
-.winamp-content-panel li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-/* Custom bullet point */
-.winamp-content-panel li::before {
-    content: '>'; /* Retro prompt symbol */
-    position: absolute;
-    left: 0;
-    color: #FA8072; /* Salmon accent */
-    font-weight: bold;
-}
-
-.winamp-content-panel blockquote {
-    border-left: 3px solid #D7FCD0; /* Accent Green */
-    padding-left: 15px;
-    margin: 15px 0;
-    font-style: italic;
-    color: #ccc;
-}
-.winamp-content-panel blockquote em {
-    display: block;
-    margin-top: 5px;
-    font-style: normal;
-    color: #aaa;
-    font-size: 0.9em;
-}
-
-.tagline {
-    color: #FFFDA5; /* Sticky note yellow */
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.now-streaming-bar {
-    background-color: #1a1a1a;
-    padding: 5px 10px;
-    margin-top: 15px;
-    border: 1px solid #444;
-    color: #D7FCD0; /* Accent Green */
-    font-size: 0.9em;
-    text-align: center;
-}
-
-.now-streaming-bar .blink {
-    animation: blinker 1s linear infinite;
-    color: #FA8072; /* Salmon */
-    margin-right: 5px;
-}
-
-@keyframes blinker {
-    50% { opacity: 0; }
-}
-
-.separator {
-    border: none;
-    border-top: 1px dashed #555;
-    margin: 20px 0;
-}
-
-.contact-links a, .social-icons a, .contact-links-prominent a, .social-icons-prominent a {
-    color: #D7FCD0; /* Accent Green */
+a {
+    color: #0056b3; /* A slightly stronger blue for links */
     text-decoration: none;
-    transition: color 0.2s;
-    margin: 0 5px; /* Add spacing between inline links */
+    transition: color 0.2s ease;
 }
-.contact-links a:hover, .social-icons a:hover, .contact-links-prominent a:hover, .social-icons-prominent a:hover {
-    color: #fff;
+
+a:hover {
+    color: #003d80;
     text-decoration: underline;
 }
 
-.contact-links, .social-icons {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 1.1em;
+ul {
+    list-style: none;
+    padding-left: 0;
 }
-.social-icons {
-     margin-top: 10px;
-     display: flex; /* Use flexbox for better wrapping/spacing */
-     justify-content: center;
-     flex-wrap: wrap;
- }
 
-.contact-links-prominent {
-    text-align: center;
-    margin: 20px 0;
+ul li {
+    margin-bottom: 0.8em;
+    padding-left: 1.5em;
+    position: relative;
+}
+
+ul li::before {
+    content: '■'; /* Square bullet */
+    position: absolute;
+    left: 0;
+    color: inherit; /* Inherit color from parent block for contrast */
+    opacity: 0.7;
+    font-size: 0.8em;
+    top: 0.2em;
+}
+
+blockquote {
+    border-left: 3px solid rgba(0, 0, 0, 0.2); /* Subtle quote indicator */
+    padding-left: 1.5em;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #333; /* Slightly darker for quotes */
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 0.5em;
+    font-style: normal;
+    font-size: 0.9em;
+    color: #555;
+}
+
+strong {
+    font-weight: 700;
+    color: #111;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    padding: 40px 0;
+    margin-bottom: 40px;
+    text-align: left; /* Align left for editorial feel */
+    border-bottom: 1px solid #eee; /* Soft separator */
+}
+
+.hero-content h1 {
+    background-color: #FFFDA5; /* Pastel Yellow background for H1 */
+    display: inline; /* Keep background tight to text */
+    padding: 0.1em 0.3em;
+    box-decoration-break: clone; /* Handle line breaks nicely */
+    -webkit-box-decoration-break: clone;
+}
+
+.hero-bullets {
+    margin-top: 25px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.hero-bullets li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+    color: #333;
+}
+.hero-bullets li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+    color: #F8BFBF; /* Pastel Red for bullet points */
+}
+
+.tagline {
+    display: block;
+    margin-top: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+/* --- Content Grid --- */
+.content-grid {
+    display: grid;
+    /* Create asymmetric columns - adjust fractions as needed */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* grid-template-columns: 2fr 1fr; Example for two columns */
+    gap: 30px; /* White space between blocks */
+    margin-bottom: 40px;
+}
+
+/* --- Content Blocks --- */
+.content-block {
+    padding: 25px;
+    border: 1px solid #DDDDDD; /* Subtle gray border */
+    /* border: 1px solid #000000; */ /* Use black for classic Mondrian */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px; /* Slightly rounded edges */
+}
+
+/* Pastel Background Colors */
+.color-pastel-red { background-color: #F8BFBF; }
+.color-pastel-yellow { background-color: #FFFDA5; }
+.color-pastel-blue { background-color: #ADD8F7; }
+
+/* Ensure text remains readable on pastel backgrounds */
+.content-block,
+.content-block h2,
+.content-block p,
+.content-block li,
+.content-block blockquote,
+.content-block cite,
+.content-block strong {
+    color: #222; /* Use near-black for text on pastels */
+}
+.content-block a { color: #004a9e; } /* Darker blue link on pastels */
+.content-block a:hover { color: #002b5c; }
+.content-block li::before { color: rgba(0, 0, 0, 0.5); } /* Darker bullet */
+.content-block blockquote { border-left-color: rgba(0, 0, 0, 0.3); }
+
+/* Hover Effect */
+.content-block:hover {
+    transform: scale(1.01) translateY(-3px); /* Slight lift and scale */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.block-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-align: right;
+    font-size: 1rem;
+    margin-top: 20px;
+    color: #333;
+}
+.final-tagline { margin-bottom: 0; } /* Remove extra bottom margin */
+
+/* --- Specific Block Styling --- */
+
+/* Newsletter */
+#newsletter h2 { font-size: 1.5rem; }
+.substack-embed { margin-top: 15px; }
+.substack-embed iframe {
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+    min-height: 180px; /* Ensure iframe has space */
+}
+
+/* Contact */
+.contact-links {
+    margin: 25px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 .cta-button {
     display: inline-block;
-    background-color: #FA8072; /* Salmon */
-    color: #232323;
-    padding: 8px 15px;
-    border: 1px outset #ff9a8d;
-    text-decoration: none;
-    margin: 5px;
+    background-color: #fff; /* White button */
+    color: #222;
+    padding: 10px 20px;
+    border: 1px solid #222;
+    border-radius: 4px;
     font-weight: bold;
-    font-size: 1.1em;
-    transition: background-color 0.2s, transform 0.1s;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 .cta-button:hover {
-    background-color: #ff9a8d;
-    color: #111;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
 }
-.cta-button:active {
-    border-style: inset;
-    transform: scale(0.98);
-}
-.social-icons-prominent {
-    text-align: center;
+
+.social-icons {
     margin-top: 15px;
-    font-size: 1.2em;
-    display: flex; /* Use flexbox for better wrapping/spacing */
-    justify-content: center;
-    flex-wrap: wrap;
+    text-align: left; /* Or center */
 }
-.social-icons-prominent a {
-    margin: 0 10px; /* Spacing for prominent icons */
-    color: #FFFDA5; /* Yellow for social links */
-    display: inline-block; /* Ensure proper spacing */
-    margin-bottom: 5px; /* Space if they wrap */
-}
-.final-tagline { margin-top: 30px; }
-
-.placeholder-scroll {
-    border: 1px dashed #555;
-    padding: 20px;
-    margin-top: 15px;
-    text-align: center;
-    color: #888;
-}
-
-/* Side Panel (Newsletter/Equalizer) */
-.winamp-side-panel {
-    flex-basis: 250px; /* Fixed width for side panel */
-    flex-shrink: 0; /* Don't shrink */
-    background-color: #282828; /* Slightly different bg */
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.module-title {
+.social-icons a {
+    margin-right: 15px;
     font-weight: bold;
-    color: #FFFDA5; /* Yellow title */
-    background-color: #3a3a3a;
-    padding: 5px 8px;
-    margin-bottom: 10px;
+    text-decoration: underline;
+    color: #004a9e; /* Darker blue */
+}
+.social-icons a:last-child { margin-right: 0; }
+.social-icons a:hover { color: #002b5c; }
+
+/* --- Footer --- */
+.page-footer {
     text-align: center;
-    border: 1px solid #444;
-    font-size: 1.1em;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Soft separator */
+    font-size: 0.9rem;
+    color: #777;
 }
 
-.substack-embed {
-    margin-bottom: 15px;
-    flex-shrink: 0; /* Don't shrink iframe area */
-}
-.substack-embed iframe {
-    border-radius: 3px; /* Slightly round iframe corners */
-    max-width: 100%;
+/* --- Animations --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Equalizer Bars (Decorative) */
-.equalizer-bars {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-    height: 80px; /* Height of the equalizer area */
-    padding: 10px 5px;
-    border: 1px solid #444;
-    background-color: #1a1a1a;
-    margin-top: auto; /* Push to bottom */
-    flex-shrink: 0;
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.equalizer-bars .bar {
-    width: 10%;
-    background-color: #D7FCD0; /* Accent Green */
-    animation: equalize 1.5s ease-in-out infinite alternate;
-}
-/* Stagger animation delays */
-.equalizer-bars .bar:nth-child(1) { height: 60%; animation-delay: 0s; background-color: #d7fcd0;}
-.equalizer-bars .bar:nth-child(2) { height: 30%; animation-delay: 0.2s; background-color: #c0fabb;}
-.equalizer-bars .bar:nth-child(3) { height: 75%; animation-delay: 0.4s; background-color: #a9f8a6;}
-.equalizer-bars .bar:nth-child(4) { height: 50%; animation-delay: 0.6s; background-color: #92f691;}
-.equalizer-bars .bar:nth-child(5) { height: 65%; animation-delay: 0.8s; background-color: #FA8072; } /* Salmon accent bar */
-.equalizer-bars .bar:nth-child(6) { height: 40%; animation-delay: 1s; background-color: #a9f8a6; }
-.equalizer-bars .bar:nth-child(7) { height: 70%; animation-delay: 1.2s; background-color: #c0fabb; }
-
-@keyframes equalize {
-    0% { height: 10%; }
-    50% { height: 100%; }
-    100% { height: 10%; }
-}
-
-
-/* Winamp Footer */
-.winamp-footer {
-    background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
-    padding: 5px 10px;
-    text-align: center;
-    font-size: 0.8em;
-    color: #aaa;
-    border-top: 1px solid #1a1a1a;
-    height: 25px; /* Consistent small footer */
-}
-
-/* Responsive Design */
+/* --- Responsive Design --- */
 @media (max-width: 768px) {
-    .winamp-container {
-        margin: 10px auto; /* Less margin on mobile */
-        border: none; /* Remove outer border if needed */
-        box-shadow: none;
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+
+    .page-wrapper {
+        padding: 20px 15px;
     }
 
-    .winamp-body-wrapper {
-        flex-direction: column; /* Stack main content and side panel */
+    .content-grid {
+        display: block; /* Stack blocks vertically */
+        gap: 0; /* Remove grid gap */
     }
 
-    .winamp-main-body {
-        border-right: none; /* Remove border when stacked */
-        border-bottom: 1px solid #1a1a1a; /* Add bottom border instead */
+    .content-block {
+        margin-bottom: 25px; /* Add space between stacked blocks */
+    }
+    .content-block:last-child {
+        margin-bottom: 0;
     }
 
-    .winamp-side-panel {
-        flex-basis: auto; /* Allow side panel height to adjust */
-        width: 100%; /* Full width */
-        margin-top: 0; /* Remove space */
+    .hero-content h1 {
+        display: inline-block; /* Ensure background works okay */
     }
 
-    .equalizer-bars {
-        margin-top: 15px; /* Ensure space above equalizer */
-        height: 60px;
+    .contact-links {
+        flex-direction: column; /* Stack buttons */
     }
-
-    .winamp-content-panel {
-        min-height: 250px; /* Adjust min height */
-        max-height: none; /* Allow full scroll on mobile */
-        overflow-y: visible; /* Let the page scroll, not the panel */
+    .cta-button {
+        width: 100%; /* Full width buttons */
     }
-
-     .title-text { font-size: 0.9em; } /* Slightly smaller title */
-     .window-controls { display: none; } /* Hide decorative controls */
-
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: 10px 5px; /* Less padding on very small screens */
-    }
-    .winamp-container {
-        margin: 5px auto;
-    }
-     .tab-button {
-        padding: 5px 8px;
-        font-size: 1em;
-    }
-    .winamp-content-panel h2 {
-        font-size: 1.5em;
-    }
-    .cta-button {
-        padding: 6px 12px;
-        font-size: 1em;
-    }
-    .equalizer-bars {
-         height: 50px;
-     }
-     .social-icons a, .social-icons-prominent a {
-         font-size: 0.9em; /* Slightly smaller social links on small screens */
-         margin: 0 4px; /* Adjust spacing */
-     }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.3rem; }
+    body { font-size: 15px; }
+    .page-wrapper { padding: 15px 10px; }
 }
